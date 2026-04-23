@@ -1,6 +1,7 @@
 <?php
 class ProductsController extends AppController
 {
+    public $components = array('Logger');
     public function index()
     {
         $products = $this->Product->find("all");  // ["limit" => 3]
@@ -27,32 +28,33 @@ class ProductsController extends AppController
 
     // ! Crud Operations
 // Add New Product
-    // public function add()
-    // {
-
-    //     if ($this->request->is('post')) {
-    //         $this->Product->create();
-
-    //         if ($this->Product->save($this->request->data)) {
-    //             if ($this->Product->validates()) {
-    //                 return $this->redirect(array("action" => "index"));
-    //             } else {
-    //                 $this->set("errors", $this->Product->validationErrors);
-    //             }
-    //         }
-    //     }
-    // }
-
-
-
-
-     public function add()
+    public function add()
     {
+
         if ($this->request->is('post')) {
-            $this->Product->save($this->request->data);
-            $this->redirect(array("action" => "index"));
+            $this->Product->create();
+
+            if ($this->Product->save($this->request->data)) {
+                if ($this->Product->validates()) {
+                          $this->Logger->logAction("New product added");
+                    return $this->redirect(array("action" => "index"));
+                } else {
+                    $this->set("errors", $this->Product->validationErrors);
+                }
+            }
         }
     }
+
+
+
+
+    //  public function add()
+    // {
+    //     if ($this->request->is('post')) {
+    //         $this->Product->save($this->request->data);
+    //         $this->redirect(array("action" => "index"));
+    //     }
+    // }
 
     // Edit the Product 
 

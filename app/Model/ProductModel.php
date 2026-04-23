@@ -2,7 +2,7 @@
 class Product extends AppModel
 {
 
-  public $actsAs = array('Tree');
+  public $actsAs = array('Custom');
     public $validate = array(
         'name' => array(
             'rule' => array('notEmpty'),
