@@ -4,13 +4,16 @@ class ProductsController extends AppController
     public $components = array('Logger');
     public function index()
     {
+  
+        // debug($this->Product->find("all"));
+        // die();
         $products = $this->Product->find("all");  // ["limit" => 3]
         // $products = $this->Product->findAllById(2);  // ["limit" => 3]
         // $products = $this->Product->find("available");
         // debug($products);
         // die;
 
-
+        
         $this->set("products", $products);
         // $this->set("products", $this->Product->findAllByOrderStatus('3'));
 
